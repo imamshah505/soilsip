@@ -4,7 +4,7 @@ const cors = require('cors');
 const apiRoutes = require('./routes/api');
 
 const app = express();
-const PORT = 3000; // You can change this if needed
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors()); // Allows frontend to talk to backend
@@ -12,6 +12,11 @@ app.use(bodyParser.json()); // Parses JSON bodies
 
 // Routes
 app.use('/api', apiRoutes);
+
+// Optional: root route to test Render
+app.get("/", (req, res) => {
+    res.send("Backend is running");
+  });
 
 // Start the server
 app.listen(PORT, () => {
